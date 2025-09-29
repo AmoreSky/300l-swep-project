@@ -84,7 +84,23 @@ function calculateArea() {
   let area = 0;
 
   function num(id) {
-    return parseFloat(document.getElementById(id).value) || 0;
+     const el = document.getElementById(id);
+    if (!el) return null; // in case the input doesn't exist
+    const value = el.value.trim();
+    if (value === "") {
+      alert("Error: Please fill in all required fields.");
+      throw new Error("Empty input");
+    }
+    const number = parseFloat(value);
+    if (isNaN(number)) {
+      alert("Error: Invalid number entered.");
+      throw new Error("Invalid number");
+    }
+    if (number < 0) {
+      alert("Error: Negative values are not allowed.");
+      throw new Error("Negative number");
+    }
+    return number;
   }
 
   switch (shape) {
